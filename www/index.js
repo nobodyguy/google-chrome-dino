@@ -1,6 +1,7 @@
 import { AllocatorCharacterArray, Character, CharacterAllocator, CharacterMeta } from "./character";
 import { dino_layout, stone_layout, themes, cloud_layout, pit_layout, bird_layout, cactus_layout, retry_layout, star_layout } from "./layouts";
 import { applyVelocityToPosition, isCollided, Position, Velocity } from "./physics";
+import { initBtScaleControl } from "./btScaleControl";
 
 const canvas = document.getElementById("board");
 const canvas_ctx = canvas.getContext('2d');
@@ -86,6 +87,7 @@ let harmfull_character_allocator = [
 ]
 
 function initialize() {
+    initBtScaleControl();
     current_theme = themes.classic;
     cumulative_velocity = new Velocity(0, 0);
     game_over = false;
@@ -108,19 +110,6 @@ function initialize() {
         if (dino_ready_to_jump) {
             dino_ready_to_jump = false;
             dino_current_trust = DINO_INITIAL_TRUST.clone();
-        }
-    };
-
-    document.body.onclick = () => {
-        if (game_over) {
-            document.ontouchstart();
-        }
-    };
-
-    document.body.onkeydown = event => {
-        // keyCode is depricated
-        if (event.keyCode === 32 || event.key === ' ') {
-            document.ontouchstart();
         }
     };
 }
