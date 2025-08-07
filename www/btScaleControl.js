@@ -98,7 +98,7 @@ function updateConnectionStatus(status) {
 
 function updateWeightDisplay(weight) {
   const weightDisplay = document.getElementById("weightDisplay");
-  
+
   if (!weightDisplay) {
     console.error('Weight display element not found');
     return;
@@ -233,7 +233,7 @@ function triggerProgressorJump() {
 
 function bindEventHandlers() {
   console.log('Binding event handlers...');
-  
+
   // Threshold input handler
   const thresholdInput = document.getElementById("thresholdInput");
   if (thresholdInput) {
@@ -296,13 +296,47 @@ function bindEventHandlers() {
   console.log('Event handlers bound successfully');
 }
 
+function detectWebBTSupport() {
+  // Check if Web Bluetooth is supported
+  if (!('bluetooth' in navigator)) {
+    const warningMessage = document.createElement('div');
+    warningMessage.innerHTML = `
+    This game requires Web Bluetooth, which is not supported in your browser.
+    If you are using iOS, please open this page using the
+    <a href="https://apps.apple.com/us/app/bluefy-web-ble-browser/id1492822055" target="_blank" rel="noopener noreferrer">Bluefy app</a>.
+  `;
+    warningMessage.style.position = 'fixed';
+    warningMessage.style.top = '0';
+    warningMessage.style.left = '0';
+    warningMessage.style.right = '0';
+    warningMessage.style.backgroundColor = '#ffcc00';
+    warningMessage.style.color = '#000';
+    warningMessage.style.padding = '16px';
+    warningMessage.style.zIndex = '9999';
+    warningMessage.style.textAlign = 'center';
+    warningMessage.style.fontSize = '16px';
+
+    // Style the link
+    const link = warningMessage.querySelector('a');
+    link.style.color = '#000';
+    link.style.textDecoration = 'underline';
+    link.style.fontWeight = 'bold';
+
+    document.body.appendChild(warningMessage);
+  }
+
+}
+
 export function initBtScaleControl() {
   if (isInitialized) {
     return;
   }
 
   console.log('Initializing BT Scale Control...');
-  
+
+  // Check if Web Bluetooth is supported
+  detectWebBTSupport();
+
   // Check if DOM is already loaded
   if (document.readyState === 'loading') {
     document.addEventListener("DOMContentLoaded", () => {

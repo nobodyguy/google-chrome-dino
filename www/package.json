@@ -1,10 +1,7 @@
 {
   "name": "chrome-dino",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "webpack": "webpack --production",
+    "build": "webpack --production",
     "start": "webpack-dev-server"
   },
   "devDependencies": {
@@ -13,8 +10,6 @@
     "@babel/preset-env": "^7.28.0",
     "@webpack-cli/serve": "^3.0.1",
     "babel-loader": "^8.4.1",
-    "vite": "^7.0.6",
-    "vite-plugin-babel": "^1.3.2",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
