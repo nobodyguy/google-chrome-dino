@@ -8,21 +8,9 @@ module.exports = {
   },
   mode: "production",
   resolve: {
-    extensions: ['.js', '.jsx', '.png', '.jpg', /* ... */]
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules\/(?!(\@hangtime\/grip-connect)\/).*/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-            plugins: ["@babel/plugin-proposal-class-properties"],
-          },
-        },
-      },
-    ],
-  },
+    // Make it work with webpack 4
+    alias: {
+      '@hangtime/grip-connect': path.resolve(__dirname, 'node_modules/@hangtime/grip-connect/dist/cjs/index.js')
+    }
+  }
 };
